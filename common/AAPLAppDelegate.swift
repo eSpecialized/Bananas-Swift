@@ -26,8 +26,7 @@ class AAPLAppDelegate: NSObject {
 
     class func sharedAppDelegate() -> AAPLAppDelegate {
         #if os(iOS)
-//	return [UIApplication sharedApplication].delegate;
-            return UIApplication.sharedApplication().delegate as! AAPLAppDelegate
+            return UIApplication.shared.delegate as! AAPLAppDelegate
         #else
             return NSApp.delegate as! AAPLAppDelegate
         #endif
@@ -68,7 +67,7 @@ class AAPLAppDelegate: NSObject {
 
         let progress = Progress(totalUnitCount: 10)
 
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async {
+        DispatchQueue.global(qos: .default).async {
             progress.becomeCurrent(withPendingUnitCount: 2)
 
             let ui = AAPLInGameScene(size: self.scnView.bounds.size)
@@ -76,7 +75,7 @@ class AAPLAppDelegate: NSObject {
                 self.scnView.overlaySKScene = ui
             }
 
-            progress.resignCurrent()
+//            progress.resignCurrent()
             progress.becomeCurrent(withPendingUnitCount: 3)
 
             let gameSim = AAPLGameSimulation.sim

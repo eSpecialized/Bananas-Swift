@@ -55,14 +55,14 @@ class AAPLSceneView: SCNView {
         self.setupGestureRecognizer()
     }
     private func setupGestureRecognizer() {
-        let gesture = AAPLVirtualDPadGestureRecognizer(target: self, action: #selector(AAPLSceneView.handleVirtualDPadAction(_:)))
+        let gesture = AAPLVirtualDPadGestureRecognizer(target: self, action: #selector(handleVirtualDPadAction(_:)))
         gesture.delegate = self
         self.addGestureRecognizer(gesture)
     }
 //
 //- (void)handleVirtualDPadAction:(AAPLVirtualDPadGestureRecognizer *)gesture
 //{
-    @objc func handleVirtualDPadAction(gesture: AAPLVirtualDPadGestureRecognizer) {
+    @objc func handleVirtualDPadAction(_ gesture: AAPLVirtualDPadGestureRecognizer) {
 //	[self updateKey:AAPLLeftKey isPressed:gesture.leftPressed];
         self.updateKey(AAPLLeftKey, isPressed: gesture.leftPressed)
 //	[self updateKey:AAPLRightKey isPressed:gesture.rightPressed];
@@ -76,11 +76,11 @@ class AAPLSceneView: SCNView {
 //
 //- (BOOL)gestureRecognizerShouldBegin:(UIGestureRecognizer *)gestureRecognizer
 //{
-    override func gestureRecognizerShouldBegin(gestureRecognizer: UIGestureRecognizer) -> Bool {
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
 //	if (self.scene) {
         if self.scene != nil {
 //		return [AAPLGameSimulation sim].gameState == AAPLGameStateInGame;
-            return AAPLGameSimulation.sim.gameState == .InGame
+            return (AAPLGameSimulation.sim.gameState == .inGame)
 //	}
         }
 //	return NO;
@@ -90,17 +90,17 @@ class AAPLSceneView: SCNView {
 //
 //- (void)touchesEnded:(NSSet *)touches withEvent:(UIEvent *)event
 //{
-    override func touchesEnded(touches: Set<UITouch>, withEvent event: UIEvent?) {
+    override func touchesEnded(_ touches: Set<UITouch>, with event: UIEvent?) {
 //	AAPLInGameScene *skScene = (AAPLInGameScene *)self.overlaySKScene;
         let skScene = self.overlaySKScene as! AAPLInGameScene
 //	UITouch *touch = [touches anyObject];
         let touch = touches.first!
 //	CGPoint p = [touch locationInNode:skScene];
-        let p = touch.locationInNode(skScene)
+        let p = touch.location(in: skScene)
 //	[skScene touchUpAtPoint:p];
         skScene.touchUpAtPoint(p)
 //	[super touchesEnded:touches withEvent:event];
-        super.touchesEnded(touches, withEvent: event)
+        super.touchesEnded(touches, with: event)
 //}
     }
 //

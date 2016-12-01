@@ -433,7 +433,7 @@ class AAPLGameLevel: NSObject, AAPLGameUIState {
         #if os(OSX)
             let options = [SCNSceneSource.LoadingOption.convertToYUp: true]
         #else
-            let options: [String: AnyObject] = [:]
+            let options: [SCNSceneSource.LoadingOption: AnyObject] = [:]
         #endif
         let scene = SCNScene(named: "level.dae", inDirectory: AAPLGameSimulation.pathForArtResource("level/"), options: options)
         for node in scene?.rootNode.childNodes ?? [] {

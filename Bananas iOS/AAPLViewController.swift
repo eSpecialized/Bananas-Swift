@@ -17,8 +17,7 @@
 
 import UIKit
 
-@objc(AAPLViewController)
-class AAPLViewController: UIViewController {
+@objc class AAPLViewController: UIViewController {
     
     var sceneView: AAPLSceneView {
         return self.view as! AAPLSceneView
@@ -28,4 +27,7 @@ class AAPLViewController: UIViewController {
         self.view = AAPLSceneView()
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 }

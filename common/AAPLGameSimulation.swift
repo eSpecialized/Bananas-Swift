@@ -397,8 +397,8 @@ class AAPLGameSimulation: SCNScene, SCNSceneRendererDelegate, SCNPhysicsContactD
 //                SCNSceneSource.LoadingOption.animationImportPolicy.rawValue: SCNSceneSource.AnimationImportPolicy.playRepeatedly as AnyObject
 //            ]
         #else
-            let options: [String: AnyObject] = [
-                SCNSceneSourceAnimationImportPolicyKey: SCNSceneSourceAnimationImportPolicyPlayRepeatedly
+            let options: [SCNSceneSource.LoadingOption: Any] = [
+                SCNSceneSource.LoadingOption.animationImportPolicy: SCNSceneSource.AnimationImportPolicy.playRepeatedly
             ]
         #endif
         let scene = SCNScene(named: path,

@@ -71,7 +71,7 @@ import QuartzCore
             var options: [SCNSceneSource.LoadingOption: Any] = [:]
 //            options[.convertToYUp.rawValue] =  boolVal
         #else
-            let options: [String: AnyObject] = [:]
+            let options: [SCNSceneSource.LoadingOption: Any] = [:]
         #endif
         let sceneSource = SCNSceneSource(url: url, options: options)
         
