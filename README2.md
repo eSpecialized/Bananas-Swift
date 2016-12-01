@@ -2,6 +2,8 @@
 
 Translated by OOPer in cooperation with shlab.jp, on 2015/11/29.
 
+Updated by Bill Thompson of willynillyinc com, on 2016/11/30
+
 Based on
 <https://developer.apple.com/library/ios/samplecode/Bananas/Introduction/Intro.html#//apple_ref/doc/uid/TP40014450>
 2014-09-17.
