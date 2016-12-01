@@ -50,7 +50,7 @@ class AAPLPostGameMenu: SKNode {
         self.isUserInteractionEnabled = true
         self.myLabel.isUserInteractionEnabled = true
         self.addChild(self.myLabel)
-        AAPLInGameScene.dropShadowOnLabel(self.myLabel)
+        _ = AAPLInGameScene.dropShadowOnLabel(self.myLabel)
         
         var      bananaLocation = CGPoint(x: frameSize.width * -0.4, y: self.frame.midY * -0.4)
         var	   coinLocation = CGPoint(x: frameSize.width * -0.4, y: self.frame.midY * -0.6)
@@ -66,7 +66,7 @@ class AAPLPostGameMenu: SKNode {
         bananaLocation.x += (self.bananaText.calculateAccumulatedFrame().width * 0.5) + frameSize.width * 0.1
         self.bananaText.position = CGPoint(x: bananaLocation.x, y: -2000)
         self.addChild(self.bananaText)
-        AAPLInGameScene.dropShadowOnLabel(self.bananaText)
+        _ = AAPLInGameScene.dropShadowOnLabel(self.bananaText)
         
         self.bananaScore = self.bananaText.copy() as! SKLabelNode
         self.bananaScore.text = "000"
@@ -80,7 +80,7 @@ class AAPLPostGameMenu: SKNode {
         coinLocation.x += (self.coinText.calculateAccumulatedFrame().width * 0.5) + frameSize.width * 0.1
         self.coinText.position = CGPoint(x: coinLocation.x, y: -2000)
         self.addChild(self.coinText)
-        AAPLInGameScene.dropShadowOnLabel(self.coinText)
+        _ = AAPLInGameScene.dropShadowOnLabel(self.coinText)
         
         
         self.coinScore = self.coinText.copy() as! SKLabelNode
@@ -94,7 +94,7 @@ class AAPLPostGameMenu: SKNode {
         totalLocation.x += (self.totalText.calculateAccumulatedFrame().width * 0.5) + frameSize.width * 0.1
         self.totalText.position = CGPoint(x: totalLocation.x, y: -2000)
         self.addChild(self.totalText)
-        AAPLInGameScene.dropShadowOnLabel(self.totalText)
+        _ = AAPLInGameScene.dropShadowOnLabel(self.totalText)
         
         
         self.totalScore = self.totalText.copy() as! SKLabelNode

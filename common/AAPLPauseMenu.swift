@@ -33,7 +33,7 @@ class AAPLPauseMenu: SKNode {
         
         self.addChild(self.myLabel)
         
-        AAPLInGameScene.dropShadowOnLabel(self.myLabel)
+        _ = AAPLInGameScene.dropShadowOnLabel(self.myLabel)
         
     }
     

@@ -39,16 +39,16 @@ import Foundation
 import CoreGraphics
 
 protocol Computable: Comparable {
-    func +(lhs: Self, rhs: Self) -> Self
-    func -(lhs: Self, rhs: Self) -> Self
-    func /(lhs: Self, rhs: Self) -> Self
-    func *(lhs: Self, rhs: Self) -> Self
-    func %(lhs: Self, rhs: Self) -> Self
+    static func +(lhs: Self, rhs: Self) -> Self
+    static func -(lhs: Self, rhs: Self) -> Self
+    static func /(lhs: Self, rhs: Self) -> Self
+    static func *(lhs: Self, rhs: Self) -> Self
+    static func %(lhs: Self, rhs: Self) -> Self
     
-    prefix func ++ (val: inout Self) -> Self
-    prefix func -- (val: inout Self) -> Self
-    postfix func ++ (val: inout Self) -> Self
-    postfix func -- (val: inout Self) -> Self
+    static prefix func ++ (val: inout Self) -> Self
+    static prefix func -- (val: inout Self) -> Self
+    static postfix func ++ (val: inout Self) -> Self
+    static postfix func -- (val: inout Self) -> Self
 }
 protocol IntegerInitializable: ExpressibleByIntegerLiteral {
     init(_: Int)
@@ -63,14 +63,14 @@ protocol IntegerInitializable: ExpressibleByIntegerLiteral {
     init(_: UInt64)
 }
 protocol IntegerComputable: IntegerInitializable, Computable {
-    func &+(lhs: Self, rhs: Self) -> Self
-    func &-(lhs: Self, rhs: Self) -> Self
+    static func &+(lhs: Self, rhs: Self) -> Self
+    static func &-(lhs: Self, rhs: Self) -> Self
 //    func &/(lhs: Self, rhs: Self) -> Self
-    func &*(lhs: Self, rhs: Self) -> Self
+    static func &*(lhs: Self, rhs: Self) -> Self
 //    func &%(lhs: Self, rhs: Self) -> Self
     
-    func << (lhs: Self, rhs: Self) -> Self
-    func >> (lhs: Self, rhs: Self) -> Self
+    static func << (lhs: Self, rhs: Self) -> Self
+    static func >> (lhs: Self, rhs: Self) -> Self
 }
 protocol SignedIntegerComputable: IntegerComputable, SignedNumber {}
 protocol FloatInitializable: ExpressibleByFloatLiteral, IntegerInitializable {

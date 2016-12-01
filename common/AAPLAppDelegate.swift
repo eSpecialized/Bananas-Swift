@@ -68,7 +68,7 @@ class AAPLAppDelegate: NSObject {
         let progress = Progress(totalUnitCount: 10)
 
         DispatchQueue.global(qos: .default).async {
-            progress.becomeCurrent(withPendingUnitCount: 2)
+//            progress.becomeCurrent(withPendingUnitCount: 2)
 
             let ui = AAPLInGameScene(size: self.scnView.bounds.size)
             DispatchQueue.main.async {
@@ -76,29 +76,29 @@ class AAPLAppDelegate: NSObject {
             }
 
 //            progress.resignCurrent()
-            progress.becomeCurrent(withPendingUnitCount: 3)
+//            progress.becomeCurrent(withPendingUnitCount: 3)
 
             let gameSim = AAPLGameSimulation.sim
             gameSim.gameUIScene = ui
 
-            progress.resignCurrent()
-            progress.becomeCurrent(withPendingUnitCount: 3)
+//            progress.resignCurrent()
+//            progress.becomeCurrent(withPendingUnitCount: 3)
 
 
             SCNTransaction.flush()
 
 		// Preload
             self.scnView.prepare(gameSim, shouldAbortBlock: nil)
-            progress.resignCurrent()
-            progress.becomeCurrent(withPendingUnitCount: 1)
+//            progress.resignCurrent()
+//            progress.becomeCurrent(withPendingUnitCount: 1)
 
 		// Game Play Specific Code
             gameSim.gameUIScene!.gameStateDelegate = gameSim.gameLevel
             gameSim.gameLevel.resetLevel()
             gameSim.gameState = .preGame
 
-            progress.resignCurrent()
-            progress.becomeCurrent(withPendingUnitCount: 1)
+//            progress.resignCurrent()
+//            progress.becomeCurrent(withPendingUnitCount: 1)
 
 		// GameController hook up
             self.listenForGameControllerWithSim(gameSim)
@@ -110,7 +110,7 @@ class AAPLAppDelegate: NSObject {
                 completionHandler?()
             }
 
-            progress.resignCurrent()
+//            progress.resignCurrent()
 
         }
 
