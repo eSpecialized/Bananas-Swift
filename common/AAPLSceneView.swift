@@ -28,7 +28,7 @@ class AAPLSceneView: SCNView {
     var keysPressed: Set<String> = []
 
 // Keyspressed is our set of current inputs
-    private func updateKey(key: String, isPressed: Bool) {
+    fileprivate func updateKey(_ key: String, isPressed: Bool) {
         if isPressed {
             self.keysPressed.insert(key)
         } else {
@@ -107,12 +107,12 @@ class AAPLSceneView: SCNView {
 //#else
     #else
 
-    override func keyDown(theEvent: NSEvent) {
+    override func keyDown(with theEvent: NSEvent) {
 
         let keyHit = theEvent.characters?.utf16.first ?? 0
 
 
-        if theEvent.modifierFlags.contains(.ShiftKeyMask) {
+        if theEvent.modifierFlags.contains(.shift) {
             self.updateKey(AAPLRunKey, isPressed: true)
         }
 
@@ -129,10 +129,10 @@ class AAPLSceneView: SCNView {
             break
         }
 
-        super.keyDown(theEvent)
+        super.keyDown(with: theEvent)
     }
 
-    override func keyUp(theEvent: NSEvent) {
+    override func keyUp(with theEvent: NSEvent) {
 
         let keyReleased = theEvent.characters?.utf16.first ?? 0
 
@@ -149,17 +149,17 @@ class AAPLSceneView: SCNView {
             break
         }
 
-        if theEvent.modifierFlags.contains(.ShiftKeyMask) {
+        if theEvent.modifierFlags.contains(.shift) {
             self.updateKey(AAPLRunKey, isPressed: false)
         }
     }
 
-    override func mouseUp(event: NSEvent) {
+    override func mouseUp(with event: NSEvent) {
         let skScene = self.overlaySKScene as! AAPLInGameScene
-        let p = skScene.convertPointFromView(event.locationInWindow)
+        let p = skScene.convertPoint(fromView: event.locationInWindow)
         skScene.touchUpAtPoint(p)
 
-        super.mouseUp(event)
+        super.mouseUp(with: event)
     }
 
     #endif

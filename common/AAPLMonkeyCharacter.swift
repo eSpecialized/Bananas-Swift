@@ -24,13 +24,13 @@ class AAPLMonkeyCharacter: AAPLSkinnedCharacter {
     var rightHand: SCNNode?
     var coconut: SCNNode?
     
-    private var isIdle: Bool = false
-    private var hasCoconut: Bool = false
+    fileprivate var isIdle: Bool = false
+    fileprivate var hasCoconut: Bool = false
     
     func createAnimations() {
         
         self.name = "monkey"
-        self.rightHand = self.childNodeWithName("Bone_R_Hand", recursively: true)
+        self.rightHand = self.childNode(withName: "Bone_R_Hand", recursively: true)
         
         isIdle = true
         hasCoconut = false
@@ -48,7 +48,7 @@ class AAPLMonkeyCharacter: AAPLSkinnedCharacter {
         self.mainSkeleton?.addAnimation(self.cachedAnimationForKey("monkey_tree_hang-1")!, forKey: "monkey_idle")
     }
     
-    private func setupTauntAnimation() {
+    fileprivate func setupTauntAnimation() {
         let taunt = self.loadAndCacheAnimation(AAPLGameSimulation.pathForArtResource("characters/monkey/monkey_tree_hang_taunt"),
             forKey: "monkey_tree_hang_taunt-1")!
         
@@ -65,13 +65,13 @@ class AAPLMonkeyCharacter: AAPLSkinnedCharacter {
         ]
     }
     
-    private func setupHangAnimation() {
+    fileprivate func setupHangAnimation() {
         let hang = self.loadAndCacheAnimation(AAPLGameSimulation.pathForArtResource("characters/monkey/monkey_tree_hang"),
             forKey: "monkey_tree_hang-1")!
         hang.repeatCount = MAXFLOAT
     }
     
-    private func setupGetCoconutAnimation() {
+    fileprivate func setupGetCoconutAnimation() {
         let pickupEventBlock: SCNAnimationEventBlock = {animation, animatedObject, playingBackward in
             self.coconut?.removeFromParentNode()
             self.coconut = AAPLCoconut.coconutProtoObject()
@@ -87,19 +87,19 @@ class AAPLMonkeyCharacter: AAPLSkinnedCharacter {
         getAnimation?.repeatCount = 0
     }
     
-    private func setupThrowAnimation() {
+    fileprivate func setupThrowAnimation() {
         let throwAnim = self.loadAndCacheAnimation(AAPLGameSimulation.pathForArtResource("characters/monkey/monkey_throw_coconut"), forKey: "monkey_throw_coconut-1")!
         throwAnim.speed = 1.5
         if throwAnim.animationEvents == nil || throwAnim.animationEvents!.isEmpty {
             let throwEventBlock: SCNAnimationEventBlock = {animation, animatedObject, playingBackward in
                 
                 if self.hasCoconut {
-                    let worldMtx = self.coconut!.presentationNode.worldTransform
+                    let worldMtx = self.coconut!.presentation.worldTransform
                     self.coconut!.removeFromParentNode()
                     
                     let node = AAPLCoconut.coconutThrowProtoObject()
                     let coconutPhysicsShape = AAPLCoconut.coconutPhysicsShape
-                    node.physicsBody = SCNPhysicsBody(type: .Dynamic, shape: coconutPhysicsShape)
+                    node.physicsBody = SCNPhysicsBody(type: .dynamic, shape: coconutPhysicsShape)
                     node.physicsBody!.restitution = 0.9
                     node.physicsBody!.collisionBitMask = GameCollisionCategoryPlayer | GameCollisionCategoryGround
                     if #available(iOS 9.0, OSX 10.11, *) {
@@ -110,7 +110,7 @@ class AAPLMonkeyCharacter: AAPLSkinnedCharacter {
                     node.transform = worldMtx
                     AAPLGameSimulation.sim.rootNode.addChildNode(node)
                     AAPLGameSimulation.sim.gameLevel.coconuts.append(node)
-                    node.physicsBody!.applyForce(SCNVector3Make(-200, 500, 300), impulse: true)
+                    node.physicsBody!.applyForce(SCNVector3Make(-200, 500, 300), asImpulse: true)
                     self.hasCoconut = false
                     self.isIdle = true
                 }
@@ -123,11 +123,11 @@ class AAPLMonkeyCharacter: AAPLSkinnedCharacter {
     
     /*! update the Monkey and decide when to throw a coconut
     */
-    override func update(deltaTime: NSTimeInterval) {
-        var distanceToCharacter = CGFloat.max
+    override func update(_ deltaTime: TimeInterval) {
+        var distanceToCharacter = CGFloat.greatestFiniteMagnitude
         let playerCharacter = AAPLGameSimulation.sim.gameLevel.playerCharacter
         
-        let pos = AAPLMatrix4GetPosition(self.presentationNode.worldTransform)
+        let pos = AAPLMatrix4GetPosition(self.presentation.worldTransform)
         let myPosition = GLKVector3Make(Float(pos.x), Float(pos.y), Float(pos.z))
         
         // If the player is to the left of the monkey, calculate how far away the character is.
